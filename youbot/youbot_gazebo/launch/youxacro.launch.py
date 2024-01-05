@@ -17,10 +17,20 @@ def generate_launch_description():
 
     use_sim_time = LaunchConfiguration("use_sim_time")
     pkg_youbot_model_description = get_package_share_directory('youbot_model_description')
+    
+    # Get paths
     xacro_file =  os.path.join(pkg_youbot_model_description, 'urdf', 'youbot.urdf.xacro')
+    #Gazebo
+    pkg_youbot_gazebo = get_package_share_directory('youbot_gazebo')
+    pkg_ros_gz_sim = get_package_share_directory('ros_gz_sim')
 
+
+    #Get xacro file and transform it into xml
     robot_description_config = xacro.process_file(xacro_file)
-    params = {"robot_description": robot_description_config.toxml(), "use_sim_time": use_sim_time}
+    robot_description = robot_description_config.toxml()
+    params = {"robot_description": robot_description "use_sim_time": use_sim_time}
+
+
 
     robot_state_publisher = Node(
         package='robot_state_publisher',
@@ -30,6 +40,13 @@ def generate_launch_description():
         parameters=[params]
     )
 
+    joint_state_publisher_gui = Node(
+        package="joint_state_publisher_gui",
+        executable="joint_state_publisher_gui",
+        name="joint_state_publisher_gui",
+        arguments=robot_description
+    )
+
      # Visualize in RViz
     rviz = Node(
        package='rviz2',
@@ -37,6 +54,15 @@ def generate_launch_description():
       #arguments=['-d', os.path.join(pkg_youbot_rviz, 'config', 'config.rviz')],
        condition=IfCondition(LaunchConfiguration('rviz'))
     )
+
+     # Setup to launch the simulator and Gazebo world
+    gazebo = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            os.path.join(pkg_ros_gz_sim, 'launch', 'gz_sim.launch.py')),       
+       # launch_arguments={'gz_args': PathJoinSubstitution([
+       #     pkg_youbot_model_description, 'sdf', 'youbotworld.sdf'
+       # ])}.items(),
+   )
 
     return LaunchDescription([
             
@@ -50,6 +76,8 @@ def generate_launch_description():
             description='Open RViz.'),
             
         robot_state_publisher,
-        rviz
+        joint_state_publisher_gui,
+        rviz,
+        gazebo,
       
         ])
