@@ -66,12 +66,36 @@ def generate_launch_description():
             os.path.join(pkg_ros_gz_sim, 'launch', 'gz_sim.launch.py')),       
         launch_arguments={'gz_args': PathJoinSubstitution([
         #   pkg_youbot_model_description, 'sdf', 'empty_world.sdf',
-           pkg_youbot_model_description, "sdf", "youbotworld.sdf",
-            #pkg_youbot_gazebo, 'worlds', 'youbotworld.sdf'
+           #pkg_youbot_model_description, "sdf", "youbotworld.sdf",
+            pkg_youbot_gazebo, 'worlds', 'youbotworld.sdf'
         ])}.items(),
    )
 
+    ignition_gazebo = Node(
+        package="ign_launch",
+        executable="ign_launch",
+        output= "screen",
+        arguments=["-s", "libgazebo_ros_init.so", "-s","libgazebo_ros_factory.so"],
+        parameters=[{
+            "ignition": "ignition-gazebo7",
+            "sdf":{"use_sim_time":True}
+        },],
+        remappings=[("/gazebo/robot_description", "/gazebo/default/robot_description")]
+    )
 
+    create_entity = Node(
+        package="ros_ign_gazebo",
+        executable="create",
+        name="create_entity",
+        arguments=[
+            "entity",
+            "--name", "Youbot",
+            #"--robot_namespace", "youbot",
+            "--topic", "/robot_description",
+            "--pose", "0 0 0.0841 0 0 0",
+        ],
+        output="screen"
+    )
 
     bridge = Node(
         #namespace="/youbot",
@@ -97,8 +121,10 @@ def generate_launch_description():
             
         robot_state_publisher,
         joint_state_publisher_gui,
+        #ignition_gazebo,
+        create_entity,
         rviz,
         gazebo,
-        bridge
+        #bridge
       
         ])
