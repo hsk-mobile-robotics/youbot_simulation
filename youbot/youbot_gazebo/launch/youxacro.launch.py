@@ -36,6 +36,7 @@ def generate_launch_description():
 
 
     robot_state_publisher = Node(
+        namespace="/youbot",
         package='robot_state_publisher',
         executable='robot_state_publisher',
         name='robot_state_publisher',
@@ -44,6 +45,7 @@ def generate_launch_description():
     )
 
     joint_state_publisher_gui = Node(
+        namespace="/youbot",
         package="joint_state_publisher_gui",
         executable="joint_state_publisher_gui",
         name="joint_state_publisher_gui",
@@ -51,6 +53,7 @@ def generate_launch_description():
 
      # Visualize in RViz
     rviz = Node(
+        namespace="/youbot",
        package='rviz2',
        executable='rviz2',
        arguments=['-d', os.path.join(pkg_youbot_rviz, 'config', 'config.rviz')],
@@ -61,12 +64,16 @@ def generate_launch_description():
     gazebo = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             os.path.join(pkg_ros_gz_sim, 'launch', 'gz_sim.launch.py')),       
-       launch_arguments={'gz_args': PathJoinSubstitution([
-            pkg_youbot_model_description, 'sdf', 'empty_world.sdf'
-        ])}.items(),
+        #launch_arguments={'gz_args': PathJoinSubstitution([
+        #   pkg_youbot_model_description, 'sdf', 'empty_world.sdf'
+          # pkg_youbot_model_description, 'sdf', 'youbotworld.sdf'
+       # ])}.items(),
    )
 
+
+
     bridge = Node(
+        namespace="/youbot",
         package='ros_gz_bridge',
         executable='parameter_bridge',
         parameters=[{
