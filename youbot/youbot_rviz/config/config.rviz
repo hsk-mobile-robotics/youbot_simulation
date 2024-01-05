@@ -6,8 +6,8 @@ Panels:
       Expanded:
         - /Global Options1
         - /Status1
+        - /TF1
         - /RobotModel1
-        - /RobotModel1/Status1
       Splitter Ratio: 0.5
     Tree Height: 549
   - Class: rviz_common/Selection
@@ -54,11 +54,7 @@ Visualization Manager:
       Frame Timeout: 15
       Frames:
         All Enabled: true
-        arm_link_0:
-          Value: true
         base_footprint:
-          Value: true
-        base_laser_front_link:
           Value: true
         base_link:
           Value: true
@@ -70,7 +66,13 @@ Visualization Manager:
           Value: true
         caster_link_fr:
           Value: true
-        plate_link:
+        wheel_link_bl:
+          Value: true
+        wheel_link_br:
+          Value: true
+        wheel_link_fl:
+          Value: true
+        wheel_link_fr:
           Value: true
       Marker Scale: 1
       Name: TF
@@ -80,20 +82,18 @@ Visualization Manager:
       Tree:
         base_footprint:
           base_link:
-            arm_link_0:
-              {}
-            base_laser_front_link:
-              {}
             caster_link_bl:
-              {}
+              wheel_link_bl:
+                {}
             caster_link_br:
-              {}
+              wheel_link_br:
+                {}
             caster_link_fl:
-              {}
+              wheel_link_fl:
+                {}
             caster_link_fr:
-              {}
-            plate_link:
-              {}
+              wheel_link_fr:
+                {}
       Update Interval: 0
       Value: true
     - Alpha: 1
@@ -114,45 +114,10 @@ Visualization Manager:
         Expand Link Details: false
         Expand Tree: false
         Link Tree Style: Links in Alphabetic Order
-        arm_link_0:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        arm_link_1:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        arm_link_2:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        arm_link_3:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        arm_link_4:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        arm_link_5:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
         base_footprint:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-        base_laser_front_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
         base_link:
           Alpha: 1
           Show Axes: false
@@ -174,26 +139,6 @@ Visualization Manager:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-        gripper_finger_link_l:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        gripper_finger_link_r:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        gripper_palm_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        plate_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
         wheel_link_bl:
           Alpha: 1
           Show Axes: false
@@ -268,16 +213,16 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 1.774160623550415
+      Distance: 2.4052352905273438
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 0.01968654990196228
-        Y: 0.041220419108867645
-        Z: -0.043067753314971924
+        X: 0
+        Y: 0
+        Z: 0
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false

@@ -1,7 +1,6 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="youbot">
-    
     <xacro:include filename="youbot_base.xacro" />
-
+    <xacro:include filename="$(find youbot_controller)/src/ros_controller.urdf.xacro"/>
 
 </robot>

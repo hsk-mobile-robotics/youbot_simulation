@@ -23,12 +23,15 @@ def generate_launch_description():
     #Gazebo
     pkg_youbot_gazebo = get_package_share_directory('youbot_gazebo')
     pkg_ros_gz_sim = get_package_share_directory('ros_gz_sim')
+    pkg_youbot_model_description = get_package_share_directory('youbot_model_description')
 
+    #RVIZ
+    pkg_youbot_rviz = get_package_share_directory('youbot_rviz')
 
     #Get xacro file and transform it into xml
     robot_description_config = xacro.process_file(xacro_file)
-    robot_description = robot_description_config.toxml()
-    params = {"robot_description": robot_description "use_sim_time": use_sim_time}
+    robot_description_xml = robot_description_config.toxml()
+    params = {"robot_description": robot_description_xml, "use_sim_time": use_sim_time}
 
 
 
@@ -44,14 +47,13 @@ def generate_launch_description():
         package="joint_state_publisher_gui",
         executable="joint_state_publisher_gui",
         name="joint_state_publisher_gui",
-        arguments=robot_description
     )
 
      # Visualize in RViz
     rviz = Node(
        package='rviz2',
        executable='rviz2',
-      #arguments=['-d', os.path.join(pkg_youbot_rviz, 'config', 'config.rviz')],
+       arguments=['-d', os.path.join(pkg_youbot_rviz, 'config', 'config.rviz')],
        condition=IfCondition(LaunchConfiguration('rviz'))
     )
 
@@ -59,10 +61,20 @@ def generate_launch_description():
     gazebo = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             os.path.join(pkg_ros_gz_sim, 'launch', 'gz_sim.launch.py')),       
-       # launch_arguments={'gz_args': PathJoinSubstitution([
-       #     pkg_youbot_model_description, 'sdf', 'youbotworld.sdf'
-       # ])}.items(),
+       launch_arguments={'gz_args': PathJoinSubstitution([
+            pkg_youbot_model_description, 'sdf', 'empty_world.sdf'
+        ])}.items(),
    )
+
+    bridge = Node(
+        package='ros_gz_bridge',
+        executable='parameter_bridge',
+        parameters=[{
+            'config_file': os.path.join(pkg_youbot_gazebo, 'config', 'youbot_gazebo_bridge.yaml'),
+            'qos_overrides./tf_static.publisher.durability': 'transient_local',
+        }],
+        output='screen'
+    )
 
     return LaunchDescription([
             
@@ -79,5 +91,6 @@ def generate_launch_description():
         joint_state_publisher_gui,
         rviz,
         gazebo,
+       # bridge
       
         ])
