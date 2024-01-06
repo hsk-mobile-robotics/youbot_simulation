@@ -71,17 +71,17 @@ def generate_launch_description():
         ])}.items(),
    )
 
-    ignition_gazebo = Node(
-        package="ign_launch",
-        executable="ign_launch",
-        output= "screen",
-        arguments=["-s", "libgazebo_ros_init.so", "-s","libgazebo_ros_factory.so"],
-        parameters=[{
-            "ignition": "ignition-gazebo7",
-            "sdf":{"use_sim_time":True}
-        },],
-        remappings=[("/gazebo/robot_description", "/gazebo/default/robot_description")]
-    )
+    #ignition_gazebo = Node(
+    #    package="ign_launch",
+    #    executable="ign_launch",
+    #    output= "screen",
+    #    arguments=["-s", "libgazebo_ros_init.so", "-s","libgazebo_ros_factory.so"],
+    #    parameters=[{
+    #        "ignition": "ignition-gazebo7",
+    #        "sdf":{"use_sim_time":True}
+    #    },],
+    #    remappings=[("/gazebo/robot_description", "/gazebo/default/robot_description")]
+    #)
 
     create_entity = Node(
         package="ros_ign_gazebo",
@@ -125,6 +125,5 @@ def generate_launch_description():
         create_entity,
         rviz,
         gazebo,
-        #bridge
-      
-        ])
+        bridge
+    ])
