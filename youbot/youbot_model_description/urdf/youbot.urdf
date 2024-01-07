@@ -33,7 +33,28 @@
       </ros>
       <update_rate>100</update_rate>
       </plugin>
+
+         <plugin
+        filename="ignition-gazebo-pose-publisher-system"
+        name="ignition::gazebo::systems::PosePublisher">
+        <publish_link_pose>true</publish_link_pose>
+        <use_pose_vector_msg>true</use_pose_vector_msg>
+        <static_publisher>true</static_publisher>
+        <static_update_frequency>1</static_update_frequency>
+      </plugin>
+
+      <plugin
+        filename="ignition-gazebo-odometry-publisher-system"
+        name="ignition::gazebo::systems::OdometryPublisher">
+        <odom_frame>diff_drive/odom</odom_frame>
+        <robot_base_frame>diff_drive</robot_base_frame>
+      </plugin>
   </gazebo>
+
+
+
+   
+
   <gazebo>
     <plugin name='base_controller'
 		      filename='libgazebo_ros_planar_move.so'>
@@ -276,7 +297,7 @@
       <geometry>
         <mesh filename="package://youbot_model_description/urdf/meshes/sensors/hokuyo.dae"/>
       </geometry>
-      <material name="black"/>
+      
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
@@ -570,8 +591,6 @@
   </link>
 
 
-
-
   <joint name="arm_joint_5" type="revolute">
     <origin rpy="0 0 2.92342402778" xyz="0 0 0.114"/>
     <parent link="arm_link_4"/>
@@ -594,7 +613,7 @@
       </geometry>
     </visual>
     <collision>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
+       <!--<<origin rpy="0 0 0" xyz="0 0 0"/>-->
       <geometry>
         <mesh filename="package://youbot_model_description/urdf/meshes/youbot_arm/arm_joint_5_convex.stl"/>
         <!--<box size="0.054 0.096 0.030"/>-->
@@ -603,11 +622,15 @@
   </link>
 
 
-  <joint name="gripper_palm_joint" type="fixed">
+  <joint name="gripper_palm_joint" type="revolute">
     <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/><!-- ="0.190287 -0.004 0.367846" xyz="-0.085052 0.365926 -0.408445"/-->
     <parent link="arm_link_5"/>
     <child link="gripper_palm_link"/>
     <axis xyz= "0 0 0"/>
+
+      <dynamics damping="1" friction="1"/>
+    <limit effort="10000.0" lower="0" upper="5.84684805556" velocity="1.570795"/>
+
   </joint>
   
   <link name="gripper_palm_link">
@@ -628,11 +651,15 @@
     </collision>
   </link>
   
-  <joint name="gripper_finger_link_l_joint" type="fixed">
+  <joint name="gripper_finger_link_l_joint" type="revolute">
     <origin rpy="0.0 0.0 3.14159" xyz="-0.0 0.010 0.03"/>
     <parent link="gripper_palm_link"/>
     <child link="gripper_finger_link_l"/>
     <axis xyz= "0 0 0"/>
+
+      <dynamics damping="1" friction="1"/>
+    <limit effort="10000.0" lower="0" upper="5.84684805556" velocity="1.570795"/>
+
   </joint>
 
   <link name="gripper_finger_link_l">
@@ -657,11 +684,15 @@
 
 <!-- Gripper Finger Link Right -->
 
-  <joint name="gripper_finger_link_r_joint" type="fixed">
+  <joint name="gripper_finger_link_r_joint" type="revolute">
     <origin rpy="0. -0.0 0.0 " xyz="0.0 -0.010 0.03"/>
     <parent link="gripper_palm_link"/>
     <child link="gripper_finger_link_r"/>
     <axis xyz= "0 0 0"/>
+
+      <dynamics damping="1" friction="1"/>
+    <limit effort="10000.0" lower="0" upper="5.84684805556" velocity="1.570795"/>
+    
   </joint>
  
  <link name="gripper_finger_link_r">

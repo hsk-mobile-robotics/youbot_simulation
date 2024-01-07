@@ -39,8 +39,8 @@ def generate_launch_description():
 
     # Load the SDF file from "description" package
     sdf_file  =  os.path.join(pkg_youbot_model_description, 'sdf', 'youbot', 'model.sdf')
-    urdf_file =  os.path.join(pkg_youbot_model_description, 'urdf', 'youbot.urdf')
-    with open(sdf_file, 'r') as infp:
+    urdf_file =  os.path.join(pkg_youbot_model_description, 'urdf', 'youbot.urdf.xacro')
+    with open(urdf_file, 'r') as infp:
         robot_desc = infp.read()
 
     # Setup to launch the simulator and Gazebo world
@@ -54,6 +54,8 @@ def generate_launch_description():
         ])}.items(),
    )
 
+    
+
     # Takes the description and joint angles as inputs and publishes the 3D poses of the robot links
     robot_state_publisher = Node(
         package='robot_state_publisher',
@@ -66,11 +68,19 @@ def generate_launch_description():
         ]
     )
 
+    #joint_state_publisher_gui = Node(
+    # package='joint_state_publisher_gui',
+    # executable='joint_state_publisher_gui',
+    # name='joint_state_publisher_gui',
+    #)
+
+
+
     # Visualize in RViz
     rviz = Node(
        package='rviz2',
        executable='rviz2',
-       arguments=['-d', os.path.join(pkg_youbot_rviz, 'rviz', 'view.rviz')],
+      #arguments=['-d', os.path.join(pkg_youbot_rviz, 'config', 'config.rviz')],
        condition=IfCondition(LaunchConfiguration('rviz'))
     )
 
@@ -93,5 +103,6 @@ def generate_launch_description():
                               description='Open RViz.'),
         #bridge,
         robot_state_publisher,
-        rviz
+       # joint_state_publisher_gui,
+        #rviz
     ])

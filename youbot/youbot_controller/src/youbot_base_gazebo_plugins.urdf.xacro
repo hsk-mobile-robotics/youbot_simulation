@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" >
+       
+
+    <gazebo>
+      <plugin filename="libignition-gazebo-diff-drive-system.so" name="ignition::gazebo::systems::DiffDrive">
+        <left_joint>wheel_joint_fl</left_joint>
+        <right_joint>wheel_joint_fr</right_joint>
+        <wheel_separation>0.316</wheel_separation>
+        <wheel_radius>0.3</wheel_radius>
+
+        <odom_publish_frequency>1</odom_publish_frequency>
+        <topic>cmd_vel</topic>
+      </plugin>
+    </gazebo>
+    <gazebo>
+      <plugin
+             filename="ignition-gazebo-odometry-publisher-system"
+             name="ignition::gazebo::systems::OdometryPublisher">
+             <odom_frame>/model/Youbot/odometry</odom_frame>
+             <robot_base_frame>base_footprint</robot_base_frame>
+         </plugin>
+    </gazebo>
+
+    <gazebo>
+      <plugin name="ignition::gazebo::systems::JointStatePublisher"
+        filename="ignition-gazebo-joint-state-publisher-system">
+        <update_rate>100</update_rate>
+        <joint_name>wheel_joint_bl</joint_name>
+        <joint_name>wheel_joint_br</joint_name>
+        <joint_name>wheel_joint_fl</joint_name>
+        <joint_name>wheel_joint_fr</joint_name>
+      </plugin>
+   
+    </gazebo>
+
+    <gazebo>
+      <plugin filename="ignition-gazebo-pose-publisher-system" name="ignition::gazebo::systems::PosePublisher">
+        <publish_link_pose>true</publish_link_pose>
+        <use_pose_vector_msg>true</use_pose_vector_msg>
+        <static_publisher>true</static_publisher>
+        <static_update_frequency>1</static_update_frequency>
+      </plugin>
+    </gazebo>
+  
+
+   <!-- 
+  
+     <gazebo>
+      <plugin name="gazebo-ros-joint-state-publisher-base"
+              filename="libgazebo-ros-joint-state-publisher.so">
+        <ros>
+          <namespace>/youbot</namespace>
+        </ros>
+        <update_rate>100</update_rate>
+        <joint_name>wheel_joint_bl</joint_name>
+        <joint_name>wheel_joint_br</joint_name>
+        <joint_name>wheel_joint_fl</joint_name>
+        <joint_name>wheel_joint_fr</joint_name>
+      </plugin>
+    </gazebo>
+      --> 
+</robot>

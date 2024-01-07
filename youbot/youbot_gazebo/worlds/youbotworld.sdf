@@ -7,7 +7,7 @@
     gz topic -e -t /model/diff_drive/odometry
     ros2 topic echo /model/diff_drive/odometry
 -->
-<sdf version="1.8">
+<sdf version="1.0">
   <world name="demo">
     <plugin
       filename="ignition-gazebo-physics-system"
@@ -67,51 +67,13 @@
         </visual>
       </link>
     </model>
-
-<model name="youbot">
+    <!-- <model name="youbot">
       <self_collide>true</self_collide>
       <pose>0 0 0.35 0 0 0</pose>
       <include merge="true">
-        <uri>package://youbot_model_description/sdf/youbot</uri>
+        <uri>package://youbot_model_description/sdf/youbot.sdf</uri> 
+         <uri>package://youbot_model_description/urdf</uri>
       </include>
-
-      <plugin
-        filename="ignition-gazebo-joint-state-publisher-system"
-        name="ignition::gazebo::systems::JointStatePublisher">
-        <ros>
-                <namespace>/youbot</namespace>
-              </ros>
-              <update_rate>100</update_rate>
-              <joint_name>virtual_joint_x</joint_name>
-              <joint_name>virtual_joint_y</joint_name>
-              <joint_name>virtual_joint_z</joint_name>
-              <joint_name>arm_joint_1</joint_name>
-              <joint_name>arm_joint_2</joint_name>
-              <joint_name>arm_joint_3</joint_name>
-              <joint_name>arm_joint_4</joint_name>
-              <joint_name>arm_joint_5</joint_name>
-              <joint_name>wheel_joint_bl</joint_name>
-              <joint_name>wheel_joint_br</joint_name>
-              <joint_name>wheel_joint_fl</joint_name>
-              <joint_name>wheel_joint_fr</joint_name>
-      </plugin>
-
-      <plugin
-        filename="ignition-gazebo-pose-publisher-system"
-        name="ignition::gazebo::systems::PosePublisher">
-        <publish_link_pose>true</publish_link_pose>
-        <use_pose_vector_msg>true</use_pose_vector_msg>
-        <static_publisher>true</static_publisher>
-        <static_update_frequency>1</static_update_frequency>
-      </plugin>
-
-      <plugin
-        filename="ignition-gazebo-odometry-publisher-system"
-        name="ignition::gazebo::systems::OdometryPublisher">
-        <odom_frame>diff_drive/odom</odom_frame>
-        <robot_base_frame>diff_drive</robot_base_frame>
-      </plugin>
-    </model>
-    
+    </model> -->
   </world>
 </sdf>
