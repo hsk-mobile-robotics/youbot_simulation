@@ -54,6 +54,18 @@ Visualization Manager:
       Frame Timeout: 15
       Frames:
         All Enabled: true
+        Youbot:
+          Value: true
+        Youbot/base_footprint:
+          Value: true
+        Youbot/wheel_link_bl:
+          Value: true
+        Youbot/wheel_link_br:
+          Value: true
+        Youbot/wheel_link_fl:
+          Value: true
+        Youbot/wheel_link_fr:
+          Value: true
         base_footprint:
           Value: true
         base_laser_front_link:
@@ -67,6 +79,8 @@ Visualization Manager:
         caster_link_fl:
           Value: true
         caster_link_fr:
+          Value: true
+        model/Youbot/odometry:
           Value: true
         wheel_link_bl:
           Value: true
@@ -98,6 +112,8 @@ Visualization Manager:
             caster_link_fr:
               wheel_link_fr:
                 {}
+        model/Youbot/odometry:
+          {}
       Update Interval: 0
       Value: true
     - Alpha: 1
@@ -179,7 +195,7 @@ Visualization Manager:
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
-    Fixed Frame: base_footprint
+    Fixed Frame: model/Youbot/odometry
     Frame Rate: 30
   Name: root
   Tools:
@@ -222,7 +238,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 2.4052352905273438
+      Distance: 14.662382125854492
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -237,7 +253,7 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.785398006439209
+      Pitch: 0.7803980112075806
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
       Yaw: 0.785398006439209

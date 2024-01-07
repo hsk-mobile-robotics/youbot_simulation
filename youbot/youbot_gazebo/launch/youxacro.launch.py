@@ -51,6 +51,13 @@ def generate_launch_description():
         name="joint_state_publisher_gui",
     )
 
+    joint_state_publisher = Node(
+        namespace="/youbot",
+        package="joint_state_publisher",
+        executable="joint_state_publisher",
+        name="joint_state_publisher",
+    )
+
      # Visualize in RViz
     rviz = Node(
         namespace="/youbot",
@@ -120,7 +127,7 @@ def generate_launch_description():
             description='Open RViz.'),
             
         robot_state_publisher,
-        joint_state_publisher_gui,
+        #joint_state_publisher_gui,
         #ignition_gazebo,
         create_entity,
         rviz,

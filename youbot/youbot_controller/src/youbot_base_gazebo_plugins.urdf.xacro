@@ -25,7 +25,13 @@
     <gazebo>
       <plugin name="ignition::gazebo::systems::JointStatePublisher"
         filename="ignition-gazebo-joint-state-publisher-system">
+        <update_rate>100</update_rate>
+        <joint_name>wheel_joint_bl</joint_name>
+        <joint_name>wheel_joint_br</joint_name>
+        <joint_name>wheel_joint_fl</joint_name>
+        <joint_name>wheel_joint_fr</joint_name>
       </plugin>
+   
     </gazebo>
 
     <gazebo>
