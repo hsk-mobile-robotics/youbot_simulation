@@ -36,7 +36,7 @@ def generate_launch_description():
 
 
     robot_state_publisher = Node(
-        #namespace="/youbot",
+        namespace="/youbot",
         package='robot_state_publisher',
         executable='robot_state_publisher',
         name='robot_state_publisher',
@@ -45,7 +45,7 @@ def generate_launch_description():
     )
 
     joint_state_publisher_gui = Node(
-        #namespace="/youbot",
+        namespace="/youbot",
         package="joint_state_publisher_gui",
         executable="joint_state_publisher_gui",
         name="joint_state_publisher_gui",
@@ -53,7 +53,7 @@ def generate_launch_description():
 
      # Visualize in RViz
     rviz = Node(
-        #namespace="/youbot",
+        namespace="/youbot",
        package='rviz2',
        executable='rviz2',
        arguments=['-d', os.path.join(pkg_youbot_rviz, 'config', 'config.rviz')],
@@ -90,15 +90,15 @@ def generate_launch_description():
         arguments=[
             "entity",
             "--name", "Youbot",
-            #"--robot_namespace", "youbot",
-            "--topic", "/robot_description",
+            "--robot_namespace", "/youbot",
+            "--topic", "/youbot/robot_description",
             "--pose", "0 0 0.0841 0 0 0",
         ],
         output="screen"
     )
 
     bridge = Node(
-        #namespace="/youbot",
+        namespace="/youbot",
         package='ros_gz_bridge',
         executable='parameter_bridge',
         parameters=[{
