@@ -8,7 +8,7 @@
         <child link="base_laser_front_link"/>
     </joint>
 
-    <link name="base_laser_front_link" type="gpu_lidar">
+    <link name="base_laser_front_link" >
         <inertial>
           <mass value="0.16"/>
           <origin rpy="0 0 0" xyz="0 0 0"/>
