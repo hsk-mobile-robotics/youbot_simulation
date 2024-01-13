@@ -3,20 +3,17 @@
        
 
     <gazebo>
-      <plugin filename="libignition-gazebo-diff-drive-system.so" name="ignition::gazebo::systems::DiffDrive">
-        <left_joint>wheel_joint_fl</left_joint>
+      <plugin filename="libgazebo_ros_diff_drive.so" name="DiffDrive"> 
+     <!--  <plugin filename="gz-sim-diff-drive-system" name="DiffDrive">-->
+        <left_joint_1>wheel_joint_fl</left_joint_1>
         <left_joint>wheel_joint_bl</left_joint>
-        <left_joint>caster_joint_fl</left_joint>
-        <left_joint>caster_joint_bl</left_joint>
-        <right_joint>wheel_joint_fr</right_joint> 
+        
+        <right_joint_1>wheel_joint_fr</right_joint_1> 
         <right_joint>wheel_joint_br</right_joint>
-        <right_joint>caster_joint_fr</right_joint> 
-        <right_joint>caster_joint_br</right_joint>
         <wheel_separation>0.3</wheel_separation>
         <wheel_diameter>0.0475</wheel_diameter>
 
         <odom_publish_frequency>10</odom_publish_frequency>
-        <topic>cmd_vel</topic>
         <robot_base_frame>base_footprint</robot_base_frame>
         <odometry_frame>odom</odometry_frame>
 
@@ -26,15 +23,17 @@
 
  
       </plugin> 
-      <!--
-        <plugin name='base_controller'
+      
+        <plugin name='planar_move'
               filename='libgazebo_ros_planar_move.so'>
-         
-          <update_rate>100</update_rate>
+         <topic>cmd_vel</topic>
+          <update_rate>10</update_rate>
           <publish_rate>10</publish_rate>
     
           <publish_odom>true</publish_odom>
           <publish_odom_tf>true</publish_odom_tf>
+          <odometyTopic>odom</odometyTopic>
+          <odometryFrame>odom</odometryFrame>
     
           <robot_base_frame>base_footprint</robot_base_frame>
     
@@ -42,7 +41,19 @@
           <covariance_y>0.0001</covariance_y>
           <covariance_yaw>0.01</covariance_yaw>
         </plugin>
-     
+      </gazebo>
+<!--
+      <gazebo>
+        <plugin name="gazebo-ros-joint-state-publisher-base"
+                filename="libgazebo-ros-joint-state-publisher.so">
+       
+          <update_rate>10</update_rate>
+          <joint_name>wheel_joint_bl</joint_name>
+          <joint_name>wheel_joint_br</joint_name>
+          <joint_name>wheel_joint_fl</joint_name>
+          <joint_name>wheel_joint_fr</joint_name>
+        </plugin>
+      </gazebo>
 
       <gazebo reference="wheel_link_fl">
         <mu1 value="0.001"/>
@@ -83,7 +94,8 @@
 
       </plugin>
   -->
-    </gazebo>
+   
+      <!-- 
     <gazebo>
       <plugin
              filename="ignition-gazebo-odometry-publisher-system"
@@ -115,20 +127,8 @@
     </gazebo>
   
 
-   <!-- 
+ 
   
-     <gazebo>
-      <plugin name="gazebo-ros-joint-state-publisher-base"
-              filename="libgazebo-ros-joint-state-publisher.so">
-        <ros>
-          <namespace>/youbot</namespace>
-        </ros>
-        <update_rate>100</update_rate>
-        <joint_name>wheel_joint_bl</joint_name>
-        <joint_name>wheel_joint_br</joint_name>
-        <joint_name>wheel_joint_fl</joint_name>
-        <joint_name>wheel_joint_fr</joint_name>
-      </plugin>
-    </gazebo>
+   
       --> 
 </robot>

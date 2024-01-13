@@ -21,8 +21,6 @@ def generate_launch_description():
     # Get paths
     xacro_file =  os.path.join(pkg_youbot_model_description, 'urdf', 'youbot.urdf.xacro')
     #Gazebo
-    pkg_youbot_gazebo = get_package_share_directory('youbot_gazebo')
-    pkg_ros_gz_sim = get_package_share_directory('ros_gz_sim')
     pkg_youbot_model_description = get_package_share_directory('youbot_model_description')
 
     #RVIZ
@@ -33,34 +31,18 @@ def generate_launch_description():
     robot_description_xml = robot_description_config.toxml()
     params = {"robot_description": robot_description_xml, "use_sim_time": use_sim_time}
 
-
-
     robot_state_publisher = Node(
-        namespace="/youbot",
+        #namespace="/youbot",
         package='robot_state_publisher',
         executable='robot_state_publisher',
         name='robot_state_publisher',
-        output='both',
+        output='screen',
         parameters=[params]
-    )
-
-    joint_state_publisher_gui = Node(
-        namespace="/youbot",
-        package="joint_state_publisher_gui",
-        executable="joint_state_publisher_gui",
-        name="joint_state_publisher_gui",
-    )
-
-    joint_state_publisher = Node(
-        namespace="/youbot",
-        package="joint_state_publisher",
-        executable="joint_state_publisher",
-        name="joint_state_publisher",
     )
 
      # Visualize in RViz
     rviz = Node(
-        namespace="/youbot",
+       # namespace="/youbot",
        package='rviz2',
        executable='rviz2',
        arguments=['-d', os.path.join(pkg_youbot_rviz, 'config', 'config.rviz')],
@@ -69,51 +51,17 @@ def generate_launch_description():
 
      # Setup to launch the simulator and Gazebo world
     gazebo = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(
-            os.path.join(pkg_ros_gz_sim, 'launch', 'gz_sim.launch.py')),       
-        launch_arguments={'gz_args': PathJoinSubstitution([
-        #   pkg_youbot_model_description, 'sdf', 'empty_world.sdf',
-           #pkg_youbot_model_description, "sdf", "youbotworld.sdf",
-            pkg_youbot_gazebo, 'worlds', 'youbotworld.sdf'
-        ])}.items(),
-   )
+        PythonLaunchDescriptionSource([
+            os.path.join(
+                get_package_share_directory("gazebo_ros"),"launch","gazebo.launch.py")]),
 
-    #ignition_gazebo = Node(
-    #    package="ign_launch",
-    #    executable="ign_launch",
-    #    output= "screen",
-    #    arguments=["-s", "libgazebo_ros_init.so", "-s","libgazebo_ros_factory.so"],
-    #    parameters=[{
-    #        "ignition": "ignition-gazebo7",
-    #        "sdf":{"use_sim_time":True}
-    #    },],
-    #    remappings=[("/gazebo/robot_description", "/gazebo/default/robot_description")]
-    #)
-
-    create_entity = Node(
-        package="ros_ign_gazebo",
-        executable="create",
-        name="create_entity",
-        arguments=[
-            "entity",
-            "--name", "Youbot",
-            "--robot_namespace", "/youbot",
-            "--topic", "/youbot/robot_description",
-            "--pose", "0 0 0.0841 0 0 0",
-        ],
-        output="screen"
     )
 
-    bridge = Node(
-        namespace="/youbot",
-        package='ros_gz_bridge',
-        executable='parameter_bridge',
-        parameters=[{
-            'config_file': os.path.join(pkg_youbot_gazebo, 'config', 'youbot_gazebo_bridge.yaml'),
-            'qos_overrides./tf_static.publisher.durability': 'transient_local',
-        }],
-        output='screen'
-    )
+    spawn_entity = Node(package="gazebo_ros", executable="spawn_entity.py",
+                        arguments=["-topic", "robot_description",
+                                   "-entity", "Youbot"],
+                                   output="screen")
+
 
     return LaunchDescription([
             
@@ -127,10 +75,9 @@ def generate_launch_description():
             description='Open RViz.'),
             
         robot_state_publisher,
-        #joint_state_publisher_gui,
-        #ignition_gazebo,
-        create_entity,
+    
         rviz,
         gazebo,
-        bridge
+        #bridge,
+        spawn_entity
     ])
