@@ -8,10 +8,6 @@
         <child link="base_laser_front_link"/>
     </joint>
 
-  <frame name="lidar_frame" attached_to="base_laser_front_link">
-    <pose>0 0 0 0 0 0</pose>
-  </frame>
-
     <link name="base_laser_front_link" type="gpu_lidar">
         <inertial>
           <mass value="0.16"/>
@@ -30,39 +26,5 @@
             <mesh filename="$(find youbot_model_description)/urdf/meshes/sensors/hokuyo_convex.dae"/>
           </geometry>
         </collision>
-
-        <sensor name='base_laser_front' type='gpu_lidar'>
-          <pose relative_to="lidar_frame">0 0 0 0 0 0</pose>
-          <update_rate>10</update_rate>
-          <topic>lidar</topic>
-          <ray>
-            <scan>
-              <horizontal>
-                  <samples>150</samples>
-                  <resolution>1</resolution>
-                  <min_angle>-1.57</min_angle>
-                  <max_angle>1.57</max_angle>
-              </horizontal>
-             <vertical>
-                  <samples>1</samples>
-                  <resolution>0.01</resolution>
-                  <min_angle>0</min_angle>
-                  <max_angle>0</max_angle>
-              </vertical>
-            </scan>
-              <range>
-                  <min>0.05</min>
-                  <max>5.6</max>
-                  <resolution>0.36</resolution>
-              </range>
-             <!-- <noise>
-                  <type>gaussian</type>
-                  <mean>0.00</mean>
-                  <stddev>0.01</stddev>
-              </noise>--> 
-          </ray>
-          <always_on>1</always_on>
-          <visualize>true</visualize>
-        </sensor>
     </link>
 </robot>

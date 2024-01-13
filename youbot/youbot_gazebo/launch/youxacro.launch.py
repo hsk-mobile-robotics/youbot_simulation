@@ -26,11 +26,12 @@ def generate_launch_description():
     #RVIZ
     pkg_youbot_rviz = get_package_share_directory('youbot_rviz')
 
-    #Get xacro file and transform it into xml
+    #Get xacro file and transform it into xml 
     robot_description_config = xacro.process_file(xacro_file)
     robot_description_xml = robot_description_config.toxml()
     params = {"robot_description": robot_description_xml, "use_sim_time": use_sim_time}
 
+   
     robot_state_publisher = Node(
         #namespace="/youbot",
         package='robot_state_publisher',
@@ -76,7 +77,7 @@ def generate_launch_description():
             
         robot_state_publisher,
     
-        rviz,
+        #rviz,
         gazebo,
         #bridge,
         spawn_entity

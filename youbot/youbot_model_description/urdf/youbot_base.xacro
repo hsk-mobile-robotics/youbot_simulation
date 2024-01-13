@@ -66,7 +66,7 @@
         <origin rpy="0 0 0" xyz="0 0 0.0841"/>
         <geometry>
           <mesh filename="$(find youbot_model_description)/urdf/meshes/youbot_base/base.dae"/>
-        </geometry>
+      </geometry>
       </visual>
       <collision>
         <origin rpy="0 0 0" xyz="0 0 0.0841"/>

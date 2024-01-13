@@ -72,27 +72,7 @@
         <mu2 value ="0.001"/>
       </gazebo>
       
-      <plugin name="omni_steering" filename="libgazebo_ros_planar_move.so">
-        <commandTopic>cmd_vel</commandTopic>
-        <odometryTopic>odom</odometryTopic>
-        <odometryRate>10</odometryRate>
-        <robotBaseFrame>base_footprint</robotBaseFrame>
-        <publishTF>true</publishTF>
-
-      </plugin>
      
-       
-    <plugin name="skid_steer_drive_controller" filename="libgazebo_ros_skid_steer_drive.so">
-        <topic>cmd_vel</topic>
-        <publishRate>10</publishRate>
-        <frontLeftJoint>wheel_joint_fl</frontLeftJoint>
-        <frontRightJoint>wheel_joint_fr</frontRightJoint>
-        <rearLeftJoint>wheel_joint_bl</rearLeftJoint>
-        <rearRightJoint>wheel_joint_br</rearRightJoint>
-        <wheel_separation>0.316</wheel_separation>
-        <wheel_radius>0.3</wheel_radius>
-
-      </plugin>
   -->
    
       <!-- 
@@ -104,31 +84,6 @@
              <robot_base_frame>base_footprint</robot_base_frame>
          </plugin>
     </gazebo>
-
-    <gazebo>
-      <plugin name="ignition::gazebo::systems::JointStatePublisher"
-        filename="ignition-gazebo-joint-state-publisher-system">
-        <update_rate>10</update_rate>
-        <joint_name>wheel_joint_bl</joint_name>
-        <joint_name>wheel_joint_br</joint_name>
-        <joint_name>wheel_joint_fl</joint_name>
-        <joint_name>wheel_joint_fr</joint_name>
-      </plugin>
-   
-    </gazebo>
-
-    <gazebo>
-      <plugin filename="ignition-gazebo-pose-publisher-system" name="ignition::gazebo::systems::PosePublisher">
-        <publish_link_pose>true</publish_link_pose>
-        <use_pose_vector_msg>true</use_pose_vector_msg>
-        <static_publisher>true</static_publisher>
-        <static_update_frequency>1</static_update_frequency>
-      </plugin>
-    </gazebo>
   
-
- 
-  
-   
       --> 
 </robot>
