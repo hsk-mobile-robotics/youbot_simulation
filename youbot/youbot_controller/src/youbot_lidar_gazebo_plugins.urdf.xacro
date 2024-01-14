@@ -5,6 +5,7 @@
     <sensor name='base_laser_front' type='lidar'>
       <pose>0 0 0 0 0 0</pose>
       <visualize>True</visualize>
+      <always_on>True</always_on>
       <update_rate>10</update_rate>
       
       <ray>
@@ -38,15 +39,18 @@
       <always_on>1</always_on>
       
     </sensor>
-    <plugin name='gazebo_ros_base_laser_front_controller' filename='libgazebo_ros_gpu_lidar_sensor.so'>
-      <publish_frequency>10</publish_frequency>
+    <plugin name='gazebo_ros_base_laser_front_controller' filename='libgazebo_ros_lidar_sensor.so'>
+      
+      <output_type>sensor_msgs/LaserScan</output_type>
        <ros>
         <argument>~/out:=/scan</argument>
+        <topic_name>/Laserscan</topic_name>
+        <publish_frequency>10</publish_frequency>
       </ros>
       
       <frame_name>base_laser_front_link</frame_name>
      
-      <topic_name>/Laserscan</topic_name>
+      
     </plugin>
   </gazebo>
 
