@@ -8,7 +8,6 @@ Panels:
         - /Status1
         - /TF1
         - /RobotModel1
-        - /RobotModel1/Status1
         - /LaserScan1
       Splitter Ratio: 0.5
     Tree Height: 549
@@ -58,6 +57,8 @@ Visualization Manager:
         All Enabled: true
         base_footprint:
           Value: true
+        base_laser_front_link:
+          Value: true
         base_link:
           Value: true
         caster_link_bl:
@@ -83,6 +84,8 @@ Visualization Manager:
         odom:
           base_footprint:
             base_link:
+              base_laser_front_link:
+                {}
               caster_link_bl:
                 {}
               caster_link_br:
@@ -116,6 +119,10 @@ Visualization Manager:
         Expand Tree: false
         Link Tree Style: Links in Alphabetic Order
         base_footprint:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        base_laser_front_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -197,7 +204,7 @@ Visualization Manager:
         Filter size: 10
         History Policy: Keep Last
         Reliability Policy: Reliable
-        Value: /youbot/scan
+        Value: /scan
       Use Fixed Frame: true
       Use rainbow: true
       Value: true
@@ -247,7 +254,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 4.650822639465332
+      Distance: 7.227962493896484
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
