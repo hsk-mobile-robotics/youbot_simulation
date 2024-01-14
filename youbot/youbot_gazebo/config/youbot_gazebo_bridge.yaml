@@ -16,7 +16,12 @@
   gz_type_name: "gz.msgs.Odometry"
   direction: GZ_TO_ROS
 - ros_topic_name: "/youbot/scan"
-  gz_topic_name: "/world/demo/model/Youbot/link/base_footprint/sensor/base_laser_front/scan"
+  gz_topic_name: "/lidar"
+  ros_type_name: "sensor_msgs/msg/LaserScan"
+  gz_type_name: "gz.msgs.LaserScan"
+  direction: GZ_TO_ROS
+  ros_topic_name: "/youbot/scan_points"
+  gz_topic_name: "/lidar/points"
   ros_type_name: "sensor_msgs/msg/LaserScan"
   gz_type_name: "gz.msgs.LaserScan"
   direction: GZ_TO_ROS

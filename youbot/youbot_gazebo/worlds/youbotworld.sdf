@@ -67,13 +67,14 @@
         </visual>
       </link>
     </model>
-    <!-- <model name="youbot">
+<!--  -->
+    <model name="arena">
       <self_collide>true</self_collide>
-      <pose>0 0 0.35 0 0 0</pose>
+      <pose>10 0 0 0 0 0</pose>
       <include merge="true">
-        <uri>package://youbot_model_description/sdf/youbot.sdf</uri> 
-         <uri>package://youbot_model_description/urdf</uri>
+        <uri>package://youbot_gazebo/worlds/robocup_at_work_2012.urdf</uri> 
       </include>
-    </model> -->
+    </model> 
+ 
   </world>
 </sdf>

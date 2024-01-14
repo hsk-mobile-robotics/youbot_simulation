@@ -75,6 +75,7 @@ def generate_launch_description():
         #   pkg_youbot_model_description, 'sdf', 'empty_world.sdf',
            #pkg_youbot_model_description, "sdf", "youbotworld.sdf",
             pkg_youbot_gazebo, 'worlds', 'youbotworld.sdf'
+            #pkg_youbot_gazebo, 'worlds', 'robocup_at_work_2012.sdf'
         ])}.items(),
    )
 

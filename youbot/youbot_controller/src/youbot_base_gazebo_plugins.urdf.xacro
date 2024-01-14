@@ -3,7 +3,7 @@
        
 
     <gazebo>
-      <plugin filename="libignition-gazebo-diff-drive-system.so" name="ignition::gazebo::systems::DiffDrive">
+      <plugin filename="libignition-gazebo-diff-drive-system" name="ignition::gazebo::systems::DiffDrive">
         <left_joint>wheel_joint_fl</left_joint>
         <left_joint>wheel_joint_bl</left_joint>
         <left_joint>caster_joint_fl</left_joint>
