@@ -19,7 +19,11 @@
           </collision>
         </link>
       
-        
+        <joint name="join1" type="fixed">
+          <origin xyz="2 0 0" rpy="0 0 0"/>
+          <parent link="wall_1"/>
+          <child link="wall_2"/>
+        </joint>
       
           <link name="wall_2">
           <inertial>
@@ -41,7 +45,11 @@
           </collision>
         </link>
       
-        
+        <joint name="join2" type="fixed">
+          <origin xyz="-2 -1.2 0" rpy="0 0 0"/>
+          <parent link="wall_2"/>
+          <child link="wall_3"/>
+        </joint>
       
         <link name="wall_3">
           <inertial>
@@ -63,7 +71,11 @@
           </collision>
         </link>
       
-        
+        <joint name="join10" type="fixed">
+          <origin xyz="-0.25 0.0 0.0" rpy="0 0 0"/>
+          <parent link="wall_2"/>
+          <child link="wall_10"/>
+        </joint>
       
         <link name="wall_10">
           <inertial>
@@ -85,7 +97,11 @@
           </collision>
         </link>
       
-     
+        <joint name="join3" type="fixed">
+          <origin xyz="0 -0.4 0" rpy="0 0 0"/>
+          <parent link="wall_3"/>
+          <child link="wall_4"/>
+        </joint>
       
         <link name="wall_4">
           <inertial>
@@ -107,7 +123,11 @@
           </collision>
         </link>
       
-        
+        <joint name="join4" type="fixed">
+          <origin xyz="0 0 0" rpy="0 0 0"/>
+          <parent link="wall_1"/>
+          <child link="wall_5"/>
+        </joint>
       
         <link name="wall_5">
           <inertial>
@@ -130,7 +150,11 @@
         </link>
       
       ----------
-      
+        <joint name="join5" type="fixed">
+          <origin xyz="-2 -0.4 0" rpy="0 0 0"/>
+          <parent link="wall_3"/>
+          <child link="wall_6"/>
+        </joint>
       
         <link name="wall_6">
           <inertial>
@@ -152,7 +176,11 @@
           </collision>
         </link>
         
-      
+        <joint name="join8" type="fixed">
+          <origin xyz="0.25 0.8 0.0" rpy="0 0 0"/>
+          <parent link="wall_6"/>
+          <child link="wall_9"/>
+        </joint>
       
         <link name="wall_9">
           <inertial>
@@ -174,7 +202,11 @@
           </collision>
         </link>
       
-        
+        <joint name="join6" type="fixed">
+          <origin xyz="-2 0 0" rpy="0 0 0"/>
+          <parent link="wall_1"/>
+          <child link="wall_7"/>
+        </joint>
       
         <link name="wall_7">
           <inertial>
@@ -196,7 +228,11 @@
           </collision>
         </link>
       
-     
+        <joint name="join7" type="fixed">
+          <origin xyz="0.25 0.8 0.0" rpy="0 0 0"/>
+          <parent link="wall_7"/>
+          <child link="wall_8"/>
+        </joint>
       
         <link name="wall_8">
           <inertial>
@@ -259,5 +295,6 @@
         <material>Gazebo/Gray</material>
         <selfCollide>true</selfCollide>
         </gazebo>
+      
       
     </robot>

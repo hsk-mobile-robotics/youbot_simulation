@@ -3,7 +3,7 @@
        
 
     <gazebo>
-      <plugin filename="libignition-gazebo-diff-drive-system" name="ignition::gazebo::systems::DiffDrive">
+      <plugin filename="libignition-gazebo-diff-drive-system.so" name="ignition::gazebo::systems::DiffDrive">
         <left_joint>wheel_joint_fl</left_joint>
         <left_joint>wheel_joint_bl</left_joint>
         <left_joint>caster_joint_fl</left_joint>
@@ -26,7 +26,18 @@
 
  
       </plugin> 
+ 
       <!--
+
+             <plugin name="omni_steering" filename="libgazebo_ros_planar_move.so">
+        <commandTopic>cmd_vel</commandTopic>
+        <odometryTopic>odom</odometryTopic>
+        <odometryRate>10</odometryRate>
+        <robotBaseFrame>base_footprint</robotBaseFrame>
+        <publishTF>true</publishTF>
+
+      </plugin>
+
         <plugin name='base_controller'
               filename='libgazebo_ros_planar_move.so'>
          
@@ -61,14 +72,7 @@
         <mu2 value ="0.001"/>
       </gazebo>
       
-      <plugin name="omni_steering" filename="libgazebo_ros_planar_move.so">
-        <commandTopic>cmd_vel</commandTopic>
-        <odometryTopic>odom</odometryTopic>
-        <odometryRate>10</odometryRate>
-        <robotBaseFrame>base_footprint</robotBaseFrame>
-        <publishTF>true</publishTF>
-
-      </plugin>
+     
      
        
     <plugin name="skid_steer_drive_controller" filename="libgazebo_ros_skid_steer_drive.so">

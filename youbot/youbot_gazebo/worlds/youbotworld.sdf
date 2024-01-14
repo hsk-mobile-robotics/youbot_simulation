@@ -67,7 +67,7 @@
         </visual>
       </link>
     </model>
-<!--  -->
+<!--  
     <model name="arena">
       <self_collide>true</self_collide>
       <pose>10 0 0 0 0 0</pose>
@@ -75,6 +75,6 @@
         <uri>package://youbot_gazebo/worlds/robocup_at_work_2012.urdf</uri> 
       </include>
     </model> 
- 
+  -->
   </world>
 </sdf>
