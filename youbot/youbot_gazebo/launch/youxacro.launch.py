@@ -92,7 +92,7 @@ def generate_launch_description():
             
         robot_state_publisher,
     
-        #rviz,
+        rviz,
         gazebo,
         #bridge,
         spawn_entity,
