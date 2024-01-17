@@ -17,12 +17,17 @@ def generate_launch_description():
 
     use_sim_time = LaunchConfiguration("use_sim_time")
     pkg_youbot_model_description = get_package_share_directory('youbot_model_description')
-    
+    pkg_youbot_gazebo = get_package_share_directory('youbot_gazebo')
+
     # Get paths
     xacro_file =  os.path.join(pkg_youbot_model_description, 'urdf', 'youbot.urdf.xacro')
+    gazebo_maze_world_path = os.path.join(pkg_youbot_gazebo,'worlds','maze','model.sdf')
+    gazebo_maze_world_config_path = os.path.join(pkg_youbot_gazebo,'worlds','maze','model.config')
+    
     #Gazebo
     pkg_youbot_model_description = get_package_share_directory('youbot_model_description')
-
+    
+    
     #RVIZ
     pkg_youbot_rviz = get_package_share_directory('youbot_rviz')
 
@@ -58,11 +63,21 @@ def generate_launch_description():
 
     )
 
+
     spawn_entity = Node(package="gazebo_ros", executable="spawn_entity.py",
                         arguments=["-topic", "robot_description",
                                    "-entity", "Youbot"],
                                    output="screen")
-
+    
+    spawn_entity_world = Node(package="gazebo_ros", executable="spawn_entity.py",
+                        arguments=[
+                                   "-entity", "Maze",
+                                   '-file', gazebo_maze_world_path,
+                                   '-x', '30.0',
+                                   '-y', '18.0',
+                                   '-z', '0.0',],
+                                   output="screen")
+ 
 
     return LaunchDescription([
             
@@ -77,8 +92,10 @@ def generate_launch_description():
             
         robot_state_publisher,
     
-        rviz,
+        #rviz,
         gazebo,
         #bridge,
-        spawn_entity
+        spawn_entity,
+        spawn_entity_world
+        
     ])
