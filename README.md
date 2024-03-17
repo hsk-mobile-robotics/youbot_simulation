@@ -86,4 +86,7 @@ ros2 run teleop_twist_keyboard teleop_twist_keyboard
 You should now be able to move the robot with your keybord.
 >[!IMPORTANT] 
 >Note that the terminal with the keybord must be the selected/active terminal.
+<<<<<<< HEAD
 
+=======
+>>>>>>> e0cbf80936849d4107357ed9889df1cbe9cb9793
